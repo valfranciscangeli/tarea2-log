@@ -4,8 +4,8 @@
 #include <sstream>
 
 
-#define N_max 64
-#define REPS 100
+#define N_max 4//64
+#define REPS 1//100
 
 
  int main(){
@@ -19,20 +19,15 @@
 
     // Tests para ambos algoritmos. Para n de 1 a 64
     for (int exp = 0; exp<N_max; exp++){
-        // creación de nombre de archivo con resultados
-        char *archivoBase = "Resultados_n_E";
-        stringstream ss;
-        ss << archivoBase << (exp+1)<<".csv";
-        char *archivo = const_cast<char *>(ss.str().c_str());
+        //creación nombre del archivo
         char archivoFilename[50];
-
-        sprintf(archivoFilename, archivo);
+        //creación de archivos  con resultados
+        sprintf(archivoFilename, "resultados_n^%d.csv",exp+1);
         FILE * results_ptr;
-        results_ptr = fopen(archivoBase, "w");
+        results_ptr = fopen(archivoFilename, "w");
         //se inicializa la línea de encabezados
-        char encabezado[] = "i,t\n";
+        char encabezado[] = "s_name, i,t\n";
         fwrite(encabezado, 1, strlen(encabezado), results_ptr);
-
 
         //variables de tiempo
         clock_t start, end;
@@ -46,20 +41,23 @@
             // Se genera uno de los arreglos
             data = generateTestData(rand(),exp);
             start = clock();
-            //llamada a Quicksort
+            // Llamada a Quicksort
             end = clock();
             tempo = (double)(end -start) / CLOCKS_PER_SEC;
-            //registro resultados para QuickSort
-            sprintf(resultRow, archivo);
+            // registro resultados quicksort
+            sprintf(resultRow,"quick,%d,%.6f\n",tests,tempo);
             
             start = clock();
-            //llamada a Radixsort
+            // Llamada a Radixsort
             end = clock();
             tempo = (double)(end -start) / CLOCKS_PER_SEC;
-            //registro resultados para RadixSort
+            sprintf(resultRow,"radix,%d,%.6f\n",tests,tempo);
+            
+            // Registro de resultados
+            fwrite(resultRow,1,strlen(resultRow),results_ptr);
 
         }
-        fclose(resultados);
+        fclose(results_ptr);
     }
     return 0;
  }

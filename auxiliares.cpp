@@ -29,7 +29,7 @@ vector <ull>generateTestData(int sd, int i) {
     int n_arreglo = 100000000;
     int lanzamientos = 100;
     /* Inicializar conjunto  del universo u*/
-    ull max = (ull)pow(2,i);
+    ull max = (ull)pow(2,i+1);
     ull nArr[max];
     for (int u = 0; u<max; u++) {
         nArr[u] = 1 + u;
