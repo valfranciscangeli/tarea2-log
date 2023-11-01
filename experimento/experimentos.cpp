@@ -5,7 +5,7 @@
 
 
 #define N_max 4//64
-#define REPS 1//100
+#define REPS 100
 
 
  int main(){
