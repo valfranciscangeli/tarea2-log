@@ -1,2 +1,41 @@
 /.dist
 /.vscode
+
+# Archivos generados por el compilador C/C++
+*.o
+*.out
+*.exe
+
+# Archivos generados por CMake
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+CMakeScripts/
+Makefile
+cmake_install.cmake
+compile_commands.json
+CMakeDoxyfile.in
+
+# Directorios de salida de compilación
+build/
+bin/
+
+# Archivos de respaldo y archivos temporales
+*~
+*.swp
+*.swo
+
+# Carpetas de archivos de respaldo
+.backup*/
+
+# Archivos de configuración generados
+CMakeLists.txt.user
+CMakeUserPresets.json
+
+# Directorio de salida de IDE (por ejemplo, Visual Studio)
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.s
