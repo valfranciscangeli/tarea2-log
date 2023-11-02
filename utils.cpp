@@ -1,8 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <random>
-
+#include "auxiliares.cpp"
 using namespace std;
 typedef unsigned long long ull;
 

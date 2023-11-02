@@ -1,10 +1,10 @@
 #include <iterator>
 #include <functional>
 #include <cstdlib> //rand()
-#include <iostream>
 #include <fstream>
-#include <vector>
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <random>
 
 
@@ -28,24 +28,26 @@ vector <ull>generateTestData(int sd, ull i, int debug) {
     int n_arreglo = 100000000;
     int lanzamientos = 100;
     /* Inicializar conjunto  del universo u*/
-    ull max = (ull)pow(2,i+1);
+    ull max = (ull)pow(2,i);    //el máximo  : 2^i
     vector <ull> nArr;
     if (debug)
         cout <<"máximo calculado: "<< max <<endl; 
+    /*Deprecado: generar vector universo de tamaño 2^i
+    vector <ull> Universo;
     for (ull u = 0; u<max; u++) {
-        nArr.push_back(1 + u);
+        Universo.push_back(1 + u);
         if (debug)
-            cout<< "Elemento creado: "<<nArr[u]<<endl;
-    }
+            cout<< "Elemento creado: "<<Universo[u] << endl;
+    }*/
+
     /* Inicializar arreglo  que se utilizará para uno de los experimentos para un cierto n*/
     vector <ull> ulongTest;
     for (n_arreglo != 0; n_arreglo--;){
-        ull index = rand()%max; //se elige un índice entre 0 y exponente-1
-        ull number = nArr[index];
+        ull number = rand()%(max+1); //se elige un índice entre 0 y el máximo
         ulongTest.push_back(number);
         if (n_arreglo%1000000 == 0 && debug){
             cout<< "Elementos creados: "<<ulongTest.size()<<" Último insertado: ";
-            cout<<number<< " Indice del insertado en u: "<< index<< endl;
+            cout<<number<< " Indice del insertado "<< n_arreglo<< endl;
         } 
     }
     
