@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include "../auxiliares.cpp"
 #include "../radix_sort.cpp"
 //#include "../quick_sort.cpp"
 #include <sstream>
@@ -11,7 +10,7 @@
 #define dbg 0
 
  int main(){
-    ull tests = 0;
+    int tests = 0;
     vector <ull> data;
     //Test genérico para probar generación de arreglo
     if (dbg == 1){
@@ -22,8 +21,8 @@
         //grabarVector(data,archivo);
     }
     // Tests para ambos algoritmos. Para n de 1 a 64
-    for (int exp = 28; exp < N_max; exp++){
-        cout << "Pruebas para n^" << exp+1<<" en curso..."<<endl;
+    for (int exp = 0; exp < N_max; exp++){
+        cout << "Pruebas para universo 2^" << exp+1<<" en curso..."<<endl;
 
         //reseto data anterior
         data.clear();
@@ -34,39 +33,39 @@
         FILE * results_ptr;
         results_ptr = fopen(archivoFilename, "w");
         //se inicializa la línea de encabezados: algoritmo, iteración, tiempo de generación de datos, tiempo ordenamiento
-        char encabezado[] = "s_name,i,t_gen,t\n";
+        char encabezado[] = "s_name,repeticion,gen_time,sort_time\n";
         fwrite(encabezado, 1, strlen(encabezado), results_ptr);
 
         //variables de tiempo
         clock_t start, end;
-        double tempo1, tempo2;
+        double tempo1, tempo2; //tiempos de generación de data y ordenamiento
         // 100 repeticiones para cada n, usando diferentes semillas
         for(tests = 0; tests < REPS; tests ++){
-            cout << "Repetición: "<< tests<<endl;
+            cout << "Repeticion: "<< tests + 1 <<endl;
             //se inicializa línea de resultados
             char resultRow1[50];
             char resultRow2[50];
 
             // Se genera uno de los arreglos
             start = clock();
-            data = generateTestData(rand(),exp,0);
+            data = generateTestData(rand(),exp+1,0);
             end = clock();
-            tempo1 = (double)(end -start) / CLOCKS_PER_SEC;
+            tempo1 = (double)(end -start) / CLOCKS_PER_SEC; 
 
             start = clock();
             // Llamada a Quicksort
-            // quickSort(data,max);
+            // quickSort(copia_de_data,max);
             end = clock();
             tempo2 = (double)(end -start) / CLOCKS_PER_SEC;
             // registro resultados quicksort
-            sprintf(resultRow1, "quick,%d,%.7f,%.7f\n", tests, tempo1, tempo2 );
+            sprintf(resultRow1, "quick,%d,%.7f,%f\n", tests+1, tempo1, tempo2);
             
             start = clock();
             // Llamada a Radixsort
-            // radixSort(data,max);
+            // radixSort(copia_de_data,max);
             end = clock();
             tempo2 = (double)(end -start) / CLOCKS_PER_SEC;
-            sprintf(resultRow2, "radix,%d,%.7f,%.7f\n", tests,tempo1, tempo2);
+            sprintf(resultRow2, "radix,%d,%.7f,%f\n", tests+1, tempo1, tempo2);
             
             // Registro de resultados
             fwrite(resultRow1,1,strlen(resultRow1),results_ptr);
