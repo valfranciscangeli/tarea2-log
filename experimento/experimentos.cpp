@@ -4,8 +4,8 @@
 #include <sstream>
 
 
-#define N_max 4//64
-#define REPS 100
+#define N_max 64
+#define REPS 2 //100
 
 
  int main(){
@@ -36,7 +36,8 @@
         for(tests = 0; tests < REPS; tests ++){
             
             //se inicializa línea de resultados
-            char resultRow[50];
+            char resultRow1[50];
+            char resultRow2[50];
 
             // Se genera uno de los arreglos
             data = generateTestData(rand(),exp);
@@ -45,16 +46,17 @@
             end = clock();
             tempo = (double)(end -start) / CLOCKS_PER_SEC;
             // registro resultados quicksort
-            sprintf(resultRow,"quick,%d,%.6f\n",tests,tempo);
+            sprintf(resultRow1,"quick,%d,%.7f\n",tests,tempo);
             
             start = clock();
             // Llamada a Radixsort
             end = clock();
             tempo = (double)(end -start) / CLOCKS_PER_SEC;
-            sprintf(resultRow,"radix,%d,%.6f\n",tests,tempo);
+            sprintf(resultRow2,"radix,%d,%.7f\n",tests,tempo);
             
             // Registro de resultados
-            fwrite(resultRow,1,strlen(resultRow),results_ptr);
+            fwrite(resultRow1,1,strlen(resultRow1),results_ptr);
+            fwrite(resultRow2,1,strlen(resultRow1),results_ptr);
 
         }
         fclose(results_ptr);
