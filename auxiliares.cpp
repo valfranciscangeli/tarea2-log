@@ -15,8 +15,7 @@ typedef unsigned long long ull;
 /*Función para generar los sets de datos para los experimentos.  
 Se le puede pasar la semilla o 0. Si se pasa 0, se usa una semilla fija.
 i es el parámetro del exponente que tendrá el máximo elemento potencia de 2*/
-vector <ull>generateTestData(int sd, int i) {
-    int debug = 0;
+vector <ull>generateTestData(int sd, ull i, int debug) {
     /* Se inicializa srand */
     unsigned int seed;
     if (sd != 0)
@@ -30,10 +29,13 @@ vector <ull>generateTestData(int sd, int i) {
     int lanzamientos = 100;
     /* Inicializar conjunto  del universo u*/
     ull max = (ull)pow(2,i+1);
-    ull nArr[max];
-    for (int u = 0; u<max; u++) {
-        nArr[u] = 1 + u;
-        cout<< "Elemento creado: "<<nArr[u]<<endl;
+    vector <ull> nArr;
+    if (debug)
+        cout <<"máximo calculado: "<< max <<endl; 
+    for (ull u = 0; u<max; u++) {
+        nArr.push_back(1 + u);
+        if (debug)
+            cout<< "Elemento creado: "<<nArr[u]<<endl;
     }
     /* Inicializar arreglo  que se utilizará para uno de los experimentos para un cierto n*/
     vector <ull> ulongTest;
@@ -41,7 +43,7 @@ vector <ull>generateTestData(int sd, int i) {
         ull index = rand()%max; //se elige un índice entre 0 y exponente-1
         ull number = nArr[index];
         ulongTest.push_back(number);
-        if (n_arreglo%1000000 == 0){
+        if (n_arreglo%1000000 == 0 && debug){
             cout<< "Elementos creados: "<<ulongTest.size()<<" Último insertado: ";
             cout<<number<< " Indice del insertado en u: "<< index<< endl;
         } 
