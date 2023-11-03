@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "/radix_sort.cpp"
+#include "../radix_sort.cpp"
 // #include "../quick_sort.cpp"
 #include <sstream>
 
@@ -57,7 +57,9 @@ int main()
 
             start = clock();
             // Llamada a Quicksort
-            // quickSort(copia_de_data,max);
+            vector<ull> copia_de_data1;
+            copia_de_data1 = data; // copiamos la data
+            // quickSort(copia_de_data1,max);
             end = clock();
             tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
             // registro resultados quicksort
@@ -65,9 +67,9 @@ int main()
 
             start = clock();
             // Llamada a Radixsort
-            vector<ull> copia_de_data;
-            copia_de_data = data; // copiamos la data
-            radixSort(copia_de_data, max);
+            vector<ull> copia_de_data2;
+            copia_de_data2 = data; // copiamos la data
+            radix_sort(copia_de_data2);
             end = clock();
             tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
             sprintf(resultRow2, "radix,%d,%.7f,%f\n", tests + 1, tempo1, tempo2);

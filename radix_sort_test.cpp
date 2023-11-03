@@ -34,24 +34,33 @@ int main()
         randomVector.push_back(randomValue);
     }
 
+    vector<ull> copia;
+    copia = randomVector;
+    sort(copia.begin(), copia.end());
+    cout << "inicio, ¿ordenado?: \n"
+         << (copia == randomVector) << endl;
+
     // imprimimos el vector original
-    cout << "vector original...\n"
-         << endl;
-    for (ull valor : randomVector)
-    {
-        cout << valor << "\n";
-    }
+    // cout << "vector original...\n"
+    //      << endl;
+    // for (ull valor : randomVector)
+    // {
+    //     cout << valor << "\n";
+    // }
 
     radix_sort(randomVector);
     // imprimimos el vector ordenado
-    cout << "vector ordenado... \n"
-         << endl;
-    for (ull valor : randomVector)
-    {
-        cout << valor << "\n";
-    }
-    cout << "fin \n"
-         << endl;
+    // cout << "vector ordenado... \n"
+    //      << endl;
+    // for (ull valor : randomVector)
+    // {
+    //     cout << valor << "\n";
+    // }
+    // cout << "fin \n"
+    //      << endl;
+
+    cout << "prueba final, ¿ordenado?: \n"
+         << (copia == randomVector) << endl;
 
     return 0;
 }
