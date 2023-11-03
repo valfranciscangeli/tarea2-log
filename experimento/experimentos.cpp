@@ -1,12 +1,11 @@
 #include <stdlib.h>
 #include <string.h>
-#include "../radix_sort.cpp"
-// #include "../quick_sort.cpp"
+#include "../quick_sort.cpp"
 #include <sstream>
 
 #define N_max 64
 #define REPS 2 // 100
-#define dbg 0
+#define dbg 0  // cambiar a 1 para debugear
 
 int main()
 {
@@ -15,7 +14,7 @@ int main()
     // Test genérico para probar generación de arreglo
     if (dbg == 1)
     {
-        data = generateTestData(0, 5, 1);
+        generateTestData(data, 0, 5, 1);
         cout << "Vector " << tests + 1 << "de largo " << data.size() << " generado con éxito " << endl;
         // se guarda el vector en un archivo
         // char *archivo = "test_base.txt";
@@ -26,8 +25,6 @@ int main()
     {
         cout << "Pruebas para universo 2^" << exp + 1 << " en curso..." << endl;
 
-        // reseto data anterior
-        data.clear();
         // creación nombre del archivo
         char archivoFilename[50];
         // creación de archivos  con resultados
@@ -44,31 +41,36 @@ int main()
         // 100 repeticiones para cada n, usando diferentes semillas
         for (tests = 0; tests < REPS; tests++)
         {
-            cout << "Repeticion: " << tests + 1 << endl;
+            cout << "Repeticion: " << tests + 1;
             // se inicializa línea de resultados
             char resultRow1[50];
             char resultRow2[50];
 
             // Se genera uno de los arreglos
+            
+            cout <<" Generando Data...";
             start = clock();
-            data = generateTestData(rand(), exp + 1, 0);
+            generateTestData(data,rand(), exp + 1, dbg);
             end = clock();
             tempo1 = (double)(end - start) / CLOCKS_PER_SEC;
-
-            start = clock();
+        
             // Llamada a Quicksort
+            cout <<" Llamando a QuickSort...";
             vector<ull> copia_de_data1;
             copia_de_data1 = data; // copiamos la data
-            // quickSort(copia_de_data1,max);
+            start = clock();
+            quick_sort(copia_de_data1);
             end = clock();
             tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
             // registro resultados quicksort
             sprintf(resultRow1, "quick,%d,%.7f,%f\n", tests + 1, tempo1, tempo2);
 
-            start = clock();
+            
             // Llamada a Radixsort
+            cout<<" LLamando a RadixSort..."<<endl;
             vector<ull> copia_de_data2;
             copia_de_data2 = data; // copiamos la data
+            start = clock();
             radix_sort(copia_de_data2);
             end = clock();
             tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
@@ -77,6 +79,9 @@ int main()
             // Registro de resultados
             fwrite(resultRow1, 1, strlen(resultRow1), results_ptr);
             fwrite(resultRow2, 1, strlen(resultRow2), results_ptr);
+
+            // reseto data anterior
+             data.clear();
         }
         fclose(results_ptr);
     }
