@@ -23,8 +23,7 @@ int main()
     ull max_value = static_cast<ull>(pow(2, 64)) - 1;
     uniform_int_distribution<ull> distribution(1, max_value);
 
-    int vectorSize = 100000;
-    // pow(2,3); // cantidad de valores en el vector
+    int vectorSize = pow(10, 6); // cantidad de valores en el vector
     vector<ull> randomVector;
 
     for (int i = 0; i < vectorSize; i++)
