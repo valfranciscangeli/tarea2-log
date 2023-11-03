@@ -39,3 +39,6 @@ CMakeUserPresets.json
 *.user
 *.userosscache
 *.s
+
+
+/output
