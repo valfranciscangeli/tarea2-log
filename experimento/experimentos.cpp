@@ -3,9 +3,47 @@
 #include "../quick_sort.cpp"
 #include <sstream>
 
+#define MAX 9999999999
 #define N_max 64
 #define REPS 2 // 100
 #define dbg 0  // cambiar a 1 para debugear
+
+
+
+/*Funcion auxiliar para obtener el k óptimo: recibe un un valor máximo que representa el 
+tamaño del universo y su máximo, y un 0 o 1 para indicar si se debería o no guardar un registro 
+estadístico de los k utilizados*/
+int kOptimo(int u, vector<ull> &test){
+    int k = 1;
+    vector<double> k_times;
+    clock_t start,end;
+    // creación de archivo de resultados para k si no existe
+    FILE *results;
+        results= fopen("Registro de tiempos por cada k.csv", "a");
+     for (int log = 1; log < log2(u)+1; log++){
+        vector<ull> arreglo(test);                              //Se copia eltest facilitado
+        start = clock();
+        radix_sort(arreglo,log);                                //Se ordena el arreglo 
+        end = clock();
+        k_times.push_back((double)end-start / CLOCKS_PER_SEC); // se caclula el tiempo
+        char linea[50];
+        sprintf(linea, "%d,%d,%.7f\n", u,log,k_times[log]);
+        fwrite(linea, 1,strlen(linea), results);
+    }
+    fclose(results);
+    double min = MAX;
+    int counter = 0;
+    // se elije el k con menor tiempo
+    for (double tiempos : k_times){
+        counter ++;
+        if (tiempos < counter){
+            counter = k;
+        }
+    }
+    
+    return k;
+}
+
 
 int main()
 {
@@ -95,3 +133,5 @@ int main()
     }
     return 0;
 }
+
+
