@@ -20,11 +20,16 @@ int main()
         // char *archivo = "test_base.txt";
         // grabarVector(data,archivo);
     }
+    // generación de archivos que registren los tiempos de  ordenamiento de radixSort para k en cada universo
+    FILE *k_times;   
+    k_times = fopen ("Registro de tiempos por cada k", "w");
+    char linea1[] = "n_universo, k, tiempo";
+    fwrite(linea1, 1,strlen(linea1), k_times);
+    fclose(k_times);
     // Tests para ambos algoritmos. Para n de 1 a 64
     for (int exp = 0; exp < N_max; exp++)
     {
         cout << "Pruebas para universo 2^" << exp + 1 << " en curso..." << endl;
-
         // creación nombre del archivo
         char archivoFilename[50];
         // creación de archivos  con resultados
@@ -34,6 +39,11 @@ int main()
         // se inicializa la línea de encabezados: algoritmo, iteración, tiempo de generación de datos, tiempo ordenamiento
         char encabezado[] = "s_name,repeticion,gen_time,sort_time\n";
         fwrite(encabezado, 1, strlen(encabezado), results_ptr);
+
+        // se calcula el k óptimo para el universo u
+        vector <ull> arreglo;
+        generateTestData(arreglo,rand(),exp+1,0);
+        int k = kOptimo(exp+1,arreglo);
 
         // variables de tiempo
         clock_t start, end;
@@ -50,14 +60,13 @@ int main()
             
             cout <<" Generando Data...";
             start = clock();
-            generateTestData(data,rand(), exp + 1, dbg);
+            generateTestData(data, rand(), exp + 1, dbg);
             end = clock();
             tempo1 = (double)(end - start) / CLOCKS_PER_SEC;
         
             // Llamada a Quicksort
             cout <<" Llamando a QuickSort...";
-            vector<ull> copia_de_data1;
-            copia_de_data1 = data; // copiamos la data
+            vector<ull> copia_de_data1(data); // copiamos la data
             start = clock();
             quick_sort(copia_de_data1);
             end = clock();
@@ -68,10 +77,9 @@ int main()
             
             // Llamada a Radixsort
             cout<<" LLamando a RadixSort..."<<endl;
-            vector<ull> copia_de_data2;
-            copia_de_data2 = data; // copiamos la data
+            vector<ull> copia_de_data2(data);// copiamos la data
             start = clock();
-            radix_sort(copia_de_data2);
+            radix_sort(copia_de_data2, k);
             end = clock();
             tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
             sprintf(resultRow2, "radix,%d,%.7f,%f\n", tests + 1, tempo1, tempo2);
