@@ -8,12 +8,12 @@
 #include <stdlib.h>
 #include <sstream>
 #include <chrono>
-#include "../quick_sort.cpp" 
+#include "../quick_sort.cpp"
 #include "../radix_sort.cpp"
 
 #define MAX 9999999999
 #define N_max 64
-#define REPS 2 // 100
+#define REPS 100
 #define dbg 0  // cambiar a 1 para debugear
 
 // Definición de tipos de datos
@@ -126,18 +126,19 @@ int main()
             end = chrono::high_resolution_clock::now();
             auto tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
             // registro resultados quicksort
-            sprintf(resultRow1, "quick,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000, 
+            sprintf(resultRow1, "quick,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000,
                                                                  (long int)tempo2.count());
 
-            
+
             // Llamada a Radixsort
             cout << " LLamando a RadixSort..." << endl;
             vector<ull> copia_de_data2(data); // copiamos la data
-            start = clock();
+            start = chrono::high_resolution_clock::now();
             radix_sort(copia_de_data2, k);
-            end = clock();
-            tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
-            sprintf(resultRow2, "radix,%d,%.7f,%f\n", tests + 1, tempo1, tempo2);
+            end = chrono::high_resolution_clock::now();
+            tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
+            sprintf(resultRow1, "radix,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000,
+                                                                 (long int)tempo2.count());
 
             // Registro de resultados
             fwrite(resultRow1, 1, strlen(resultRow1), results_ptr);
