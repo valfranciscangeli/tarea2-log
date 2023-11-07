@@ -31,6 +31,11 @@ vector<vector<ull>> bucket_sort(vector<vector<ull>> A, bool init1 = false)
         C[A_i - minimo] += 1; // contamos cuántos valores de cada uno hay en A
     }
 
+
+    // for (ull elem:C){
+    //     cout << elem << endl;
+    // }
+
     for (int j = 1; j < C.size(); j++)
     {
         C[j] += C[j - 1]; // actualizamos C para que guarde punteros

@@ -15,7 +15,7 @@ int main()
         cout << "creando valor..." << endl;
         ull randomValue = distribution(gen); // genera un número aleatorio en el rango de la distribucion
         vector<ull> subVector(2);
-        subVector[0] = extractKBit(randomValue, 0); // probamos pasando como clave el 1 bit menos significativo
+        subVector[0] = extractBits(randomValue, 0, 3); // probamos pasando como clave el 1 bit menos significativo
         subVector[1] = randomValue;
 
         randomVector.push_back(subVector);

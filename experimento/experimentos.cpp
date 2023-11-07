@@ -25,7 +25,7 @@ int kOptimo(int u, vector<ull> &test)
         start = clock();
         radix_sort(arreglo, log); // Se ordena el arreglo
         end = clock();
-        k_times.push_back((double)end - start / CLOCKS_PER_SEC); // se caclula el tiempo
+        k_times.push_back((double)(end - start) / CLOCKS_PER_SEC); // se caclula el tiempo
         char linea[50];
         sprintf(linea, "%d,%d,%.7f\n", u, log, k_times[log]);
         fwrite(linea, 1, strlen(linea), results);
