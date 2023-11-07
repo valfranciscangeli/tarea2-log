@@ -1,0 +1,5 @@
+s_name,repeticion,gen_time(s),sort_time(us)
+quick,1,12.0635100,19.000000
+radix,1,12.063510,128.000000
+quick,2,12.0546340,19.000000
+radix,2,12.054634,128.000000
