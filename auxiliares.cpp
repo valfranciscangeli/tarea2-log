@@ -16,7 +16,7 @@ typedef unsigned long long ull;
 Se le pasa pasa un vector vacío data
 Se le puede pasar la semilla o 0. Si se pasa 0, se usa una semilla fija.
 i es el parámetro del exponente que tendrá el máximo elemento potencia de 2*/
-void generateTestData(vector<ull> data, int sd, ull i, int debug)
+void generateTestData(vector<ull> data, int sd, ull i, int debug, int n_arreglo)
 {
     /* Se inicializa srand */
     unsigned int seed;
@@ -26,8 +26,8 @@ void generateTestData(vector<ull> data, int sd, ull i, int debug)
         seed = sd;
     srand(seed);
 
-    /* Limites distribuciones */
-    int n_arreglo = 100000000;
+    // /* Limites distribuciones */
+    // int n_arreglo = 100000000;
     /* Inicializar conjunto  del universo u*/
     ull max = (ull)pow(2, i); // el máximo  : 2^i
     if (debug)
