@@ -137,11 +137,12 @@ int main()
             radix_sort(copia_de_data2, k);
             end = chrono::high_resolution_clock::now();
             tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
-            sprintf(resultRow1, "radix,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000,
+           // registro resultados radixsort
+            sprintf(resultRow2, "radix,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000,
                                                                  (long int)tempo2.count());
 
             // Registro de resultados
-            fwrite(resultRow1, 1, strlen(resultRow1), results_ptr);
+            fwrite(resultRowz, 1, strlen(resultRow1), results_ptr);
             fwrite(resultRow2, 1, strlen(resultRow2), results_ptr);
 
             // Reset de data anterior
