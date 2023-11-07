@@ -3,7 +3,6 @@
 using namespace std;
 typedef unsigned long long ull;
 
-
 // bucket sort se basa en el algoritmo descrito en el Apunte,
 // considerando un valor mínimo en base al arreglo y no fijo en 1 por defecto
 // vector A contiene como elementos una (clave, contenido), esto se modificó para
@@ -48,4 +47,3 @@ vector<vector<ull>> bucket_sort(vector<vector<ull>> A, bool init1 = false)
 
     return B;
 }
-

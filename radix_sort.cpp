@@ -1,33 +1,21 @@
 #include "bucket_sort.cpp"
 
-vector<ull> transform_vector(vector<vector<ull>> old_data)
-{
-    ull vectorSize = old_data.size();
-    vector<ull> finalVector;
-
-    for (int i = 0; i < vectorSize; i++)
-    {
-
-        finalVector.push_back(old_data[i][1]);
-    }
-
-    return finalVector;
-}
-
+// radix sort implementado como en el apunte, con el cambio
+// de que ordena en bucket sort con la clave = secuencia de k bits
 void radix_sort(vector<ull> &datos, ull k = 1)
 {
 
     ull vectorSize = datos.size();
     vector<vector<ull>> newVector;
 
-    for (int inicio = 0; inicio < ull_bits; inicio += k)
+    for (ull inicio = 0; inicio < ull_bits; inicio += k)
     {
-        cout << "inicio: " << inicio << endl;
+        // cout << "inicio: " << inicio << endl;
         ull final = inicio + k - 1;
 
-        cout << "final: " << final << endl;
+        // cout << "final: " << final << endl;
 
-        for (int i = 0; i < vectorSize; i++)
+        for (ull i = 0; i < vectorSize; i++)
         {
 
             vector<ull> subVector(2);

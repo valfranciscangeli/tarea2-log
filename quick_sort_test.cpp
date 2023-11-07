@@ -10,20 +10,23 @@ int main()
     int vectorSize = 10; // cantidad de valores en el vector
     vector<ull> randomVector;
 
-    for (int i = 0; i < vectorSize; i++) {
+    for (int i = 0; i < vectorSize; i++)
+    {
         ull randomValue = distribution(gen); // genera un número aleatorio en el rango de la distribucion
         randomVector[i] = randomValue;
     }
 
     // imprimimos el vector
-    for (const ull x : randomVector) {
+    for (const ull x : randomVector)
+    {
         cout << x << " ";
     }
 
     quick_sort(randomVector);
     // imprimimos el vector de vectores ordenado
     cout << "\nVector ordenado:\n";
-    for (const ull x : randomVector) {
+    for (const ull x : randomVector)
+    {
         cout << x << " ";
     }
     cout << "" << endl;

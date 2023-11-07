@@ -1,26 +1,22 @@
 #include "auxiliares.cpp"
+
 using namespace std;
 typedef unsigned long long ull;
 int ull_bits = sizeof(ull) * 8;
 
-bool extractKBit(ull num, int k)
+// transformar vector de claves,valores a solo valores
+vector<ull> transform_vector(vector<vector<ull>> old_data)
 {
-    // Crea una máscara para aislar el bit k menos significativo
-    ull mask = 1ULL << k;
+    ull vectorSize = old_data.size();
+    vector<ull> finalVector;
 
-    // Aplica una operación AND con la máscara y verifica si el bit k es 1 o 0
-    return (num & mask) != 0;
-}
+    for (int i = 0; i < vectorSize; i++)
+    {
 
-ull obtenerBitsMenosSignificativos(ull n, ull k)
-{
-    // Máscara para obtener los k bits menos significativos
-    ull mascara = (1ULL << k) - 1ULL;
+        finalVector.push_back(old_data[i][1]);
+    }
 
-    // Aplicar la máscara para obtener los bits
-    ull bitsMenosSignificativos = n & mascara;
-
-    return bitsMenosSignificativos;
+    return finalVector;
 }
 
 // extraer los bits de n desde un indice inicio a fin contando el indice
@@ -36,7 +32,7 @@ ull extractBits(ull n, int inicio, int fin)
     }
     else if (fin >= ull_bits)
     {
-        fin = ull_bits-1;
+        fin = ull_bits - 1;
     }
 
     ull mask = (1ULL << (fin - inicio + 1)) - 1;
