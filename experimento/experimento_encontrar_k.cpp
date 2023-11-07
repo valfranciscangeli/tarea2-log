@@ -14,8 +14,6 @@
 #define N_max 64
 #define REPS 10 // numero de repeticiones por cada u
 
-#define cantidad_de_valores pow(10, 3) // poner exp 8 para 100millones
-
 // Definición de tipos de datos
 typedef unsigned long long ull;
 
@@ -23,7 +21,7 @@ typedef unsigned long long ull;
    y un 0 o 1 para indicar si se debería o no guardar un registro estadístico de los k utilizados */
 void kOptimo(int exp)
 {
-    cout<< "universo: [1, 2^" << exp << "]" << endl;
+    cout << "universo: [1, 2^" << exp << "]" << endl;
 
     vector<double> k_times;
 
@@ -38,7 +36,7 @@ void kOptimo(int exp)
         // generamos el arreglo para probar
         generateTestData(test, rand(), exp, 0, cantidad_de_valores);
 
-        for (int log = 1; log <= exp+1; log++)
+        for (int log = 1; log <= exp + 1; log++)
         {
             cout << "probando k = " << log << endl;
             vector<ull> arreglo(test); // Se copia eltest facilitado
@@ -55,7 +53,6 @@ void kOptimo(int exp)
 
     fclose(results);
     cout << "resultados registrados ..." << endl;
-  
 }
 
 int main()
@@ -78,6 +75,7 @@ int main()
         kOptimo(exp);
     }
 
-    
+    separar_registros_de_k_por_exp();
+
     return 0;
 }

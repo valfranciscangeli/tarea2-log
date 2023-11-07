@@ -14,15 +14,17 @@
 #define N_max 64
 #define REPS 100 // 100
 #define dbg 0    // cambiar a 1 para debugear
-#define cantidad_de_valores pow(10, 3) // poner exp 8 para 100millones
 // Definición de tipos de datos
 typedef unsigned long long ull;
+
+
 
 // arreglo de k's elegido (cambiar valores por los reales)
 vector<ull> ks(64, 1);
 
 int main()
 {
+   
     random_device rd; // Genera una semilla aleatoria desde el dispositivo
 
     int tests = 0;
