@@ -1,5 +1,0 @@
-s_name,repeticion,gen_time(s),sort_time(us)
-quick,1,12.8474400,20.000000
-radix,1,12.847440,130.000000
-quick,2,12.9417430,20.000000
-radix,2,12.941743,130.000000
