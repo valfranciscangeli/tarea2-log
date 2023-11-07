@@ -142,7 +142,7 @@ int main()
                                                                  (long int)tempo2.count());
 
             // Registro de resultados
-            fwrite(resultRowz, 1, strlen(resultRow1), results_ptr);
+            fwrite(resultRow1, 1, strlen(resultRow1), results_ptr);
             fwrite(resultRow2, 1, strlen(resultRow2), results_ptr);
 
             // Reset de data anterior
