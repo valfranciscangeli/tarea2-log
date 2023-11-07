@@ -2,6 +2,7 @@
 #include <string.h>
 #include "../quick_sort.cpp"
 #include <sstream>
+#include <chrono>
 
 #define MAX 9999999999
 #define N_max 64
@@ -15,31 +16,30 @@ int kOptimo(int u, vector<ull> &test)
 {
     int k = 1;
     vector<double> k_times;
-    clock_t start, end;
+
     // creación de archivo de resultados para k si no existe
     FILE *results;
-    results = fopen("Registro de tiempos por cada k.csv", "a");
-    for (int log = 1; log < log2(u) + 1; log++)
-    {
-        vector<ull> arreglo(test); // Se copia eltest facilitado
-        start = clock();
-        radix_sort(arreglo, log); // Se ordena el arreglo
-        end = clock();
-        k_times.push_back((double)(end - start) / CLOCKS_PER_SEC); // se caclula el tiempo
+        results= fopen("Registro de tiempos por cada k.csv", "a");
+     for (int log = 1; log < log2(u)+1; log++){
+        vector<ull> arreglo(test);                              //Se copia eltest facilitado
+        auto start = chrono::high_resolution_clock::now();
+        radix_sort(arreglo,log);                                //Se ordena el arreglo
+        auto end =  chrono::high_resolution_clock::now();
+        auto us = chrono::duration_cast<chrono::microseconds>(end - start);
+        k_times.push_back((double)us.count()); // se caclula el tiempo
         char linea[50];
-        sprintf(linea, "%d,%d,%.7f\n", u, log, k_times[log]);
-        fwrite(linea, 1, strlen(linea), results);
+        sprintf(linea, "%d,%d,%d\n", u, log, (int)us.count());
+        fwrite(linea, 1,strlen(linea), results);
     }
     fclose(results);
     double min = MAX;
     int counter = 0;
     // se elije el k con menor tiempo
-    for (double tiempos : k_times)
-    {
-        counter++;
-        if (tiempos < counter)
-        {
-            counter = k;
+    for (double tiempos : k_times){
+        counter ++;
+        if (tiempos < min){
+            k = counter;
+            min = tiempos;
         }
     }
 
@@ -48,6 +48,8 @@ int kOptimo(int u, vector<ull> &test)
 
 int main()
 {
+    random_device rd;     // Genera una semilla aleatoria desde el dispositivo
+
     int tests = 0;
     vector<ull> data;
     // Test genérico para probar generación de arreglo
@@ -61,9 +63,9 @@ int main()
     }
     // generación de archivos que registren los tiempos de  ordenamiento de radixSort para k en cada universo
     FILE *k_times;
-    k_times = fopen("Registro de tiempos por cada k", "w");
-    char linea1[] = "n_universo, k, tiempo";
-    fwrite(linea1, 1, strlen(linea1), k_times);
+    k_times = fopen ("Registro de tiempos por cada k.csv", "w");
+    char linea1[] = "n_universo, k, tiempo (micro segundos)\n";
+    fwrite(linea1, 1,strlen(linea1), k_times);
     fclose(k_times);
     // Tests para ambos algoritmos. Para n de 1 a 64
     for (int exp = 0; exp < N_max; exp++)
@@ -76,7 +78,7 @@ int main()
         FILE *results_ptr;
         results_ptr = fopen(archivoFilename, "w");
         // se inicializa la línea de encabezados: algoritmo, iteración, tiempo de generación de datos, tiempo ordenamiento
-        char encabezado[] = "s_name,repeticion,gen_time,sort_time\n";
+        char encabezado[] = "s_name,repeticion,gen_time(s),sort_time(us)\n";
         fwrite(encabezado, 1, strlen(encabezado), results_ptr);
 
         // se calcula el k óptimo para el universo u
@@ -97,30 +99,33 @@ int main()
 
             // Se genera uno de los arreglos
 
-            cout << " Generando Data...";
-            start = clock();
+            cout <<" Generando Data...";
+            auto start = chrono::high_resolution_clock::now();
             generateTestData(data, rand(), exp + 1, dbg);
-            end = clock();
-            tempo1 = (double)(end - start) / CLOCKS_PER_SEC;
+            auto end =  chrono::high_resolution_clock::now();
+            auto tempo1 = chrono::duration_cast<chrono::microseconds>(end - start);
 
             // Llamada a Quicksort
             cout << " Llamando a QuickSort...";
             vector<ull> copia_de_data1(data); // copiamos la data
-            start = clock();
+            start = chrono::high_resolution_clock::now();
             quick_sort(copia_de_data1);
-            end = clock();
-            tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
+            end = chrono::high_resolution_clock::now();
+            auto tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
             // registro resultados quicksort
-            sprintf(resultRow1, "quick,%d,%.7f,%f\n", tests + 1, tempo1, tempo2);
+            sprintf(resultRow1, "quick,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000, 
+                                                                 (long int)tempo2.count());
 
+            
             // Llamada a Radixsort
-            cout << " LLamando a RadixSort..." << endl;
-            vector<ull> copia_de_data2(data); // copiamos la data
-            start = clock();
+            cout<<" LLamando a RadixSort..."<<endl;
+            vector<ull> copia_de_data2(data);// copiamos la data
+            start = chrono::high_resolution_clock::now();
             radix_sort(copia_de_data2, k);
-            end = clock();
-            tempo2 = (double)(end - start) / CLOCKS_PER_SEC;
-            sprintf(resultRow2, "radix,%d,%.7f,%f\n", tests + 1, tempo1, tempo2);
+            end = chrono::high_resolution_clock::now();
+            tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
+            sprintf(resultRow2, "radix,%d,%.7f,%d\n", tests + 1, (double)tempo1.count()/1000000, 
+                                                                 (long int)tempo2.count());
 
             // Registro de resultados
             fwrite(resultRow1, 1, strlen(resultRow1), results_ptr);
