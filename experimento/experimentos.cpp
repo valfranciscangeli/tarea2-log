@@ -12,7 +12,7 @@
 
 #define MAX 9999999999
 #define N_max 64
-#define REPS 2 // 100
+#define REPS 100 // 100
 #define dbg 0  // cambiar a 1 para debugear
 
 // Definición de tipos de datos
