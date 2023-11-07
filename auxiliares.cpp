@@ -7,15 +7,16 @@
 #include <algorithm>
 #include <random>
 
-
 #define d_int int
+
 using namespace std;
 typedef unsigned long long ull;
 
 /*Función para generar los sets de datos para los experimentos.  
+Se le pasa pasa un vector vacío data
 Se le puede pasar la semilla o 0. Si se pasa 0, se usa una semilla fija.
 i es el parámetro del exponente que tendrá el máximo elemento potencia de 2*/
-vector <ull>generateTestData(int sd, ull i, int debug) {
+void generateTestData(vector <ull> data, int sd, ull i, int debug) {
     /* Se inicializa srand */
     unsigned int seed;
     if (sd != 0)
@@ -26,12 +27,10 @@ vector <ull>generateTestData(int sd, ull i, int debug) {
 
     /* Limites distribuciones */
     int n_arreglo = 100000000;
-    int lanzamientos = 100;
     /* Inicializar conjunto  del universo u*/
     ull max = (ull)pow(2,i);    //el máximo  : 2^i
-    vector <ull> nArr;
     if (debug)
-        cout <<"máximo calculado: "<< max <<endl; 
+        cout <<"\nmáximo calculado: "<< max <<endl; 
     /*Deprecado: generar vector universo de tamaño 2^i
     vector <ull> Universo;
     for (ull u = 0; u<max; u++) {
@@ -40,18 +39,17 @@ vector <ull>generateTestData(int sd, ull i, int debug) {
             cout<< "Elemento creado: "<<Universo[u] << endl;
     }*/
 
-    /* Inicializar arreglo  que se utilizará para uno de los experimentos para un cierto n*/
-    vector <ull> ulongTest;
-    for (n_arreglo != 0; n_arreglo--;){
+    ull ind = 0;
+    for (n_arreglo > 0; n_arreglo--;){
         ull number = rand()%(max+1); //se elige un índice entre 0 y el máximo
-        ulongTest.push_back(number);
-        if (n_arreglo%1000000 == 0 && debug){
-            cout<< "Elementos creados: "<<ulongTest.size()<<" Último insertado: ";
-            cout<<number<< " Indice del insertado "<< n_arreglo<< endl;
+        data.push_back(number);
+        if ((n_arreglo+1)%1000000 == 0 && debug){
+            cout<< "Elementos creados: "<<data.size()<<" Último insertado: ";
+            cout<<data[ind]<< " Indice del insertado "<< ind << endl;
         } 
+        ind++;
     }
-    
-    return ulongTest;
+    cout<< "Vector listo"<< endl;
 }
 
 /*Función auxiliar para grabar un vector en memoria */
