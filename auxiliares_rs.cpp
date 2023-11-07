@@ -1,7 +1,17 @@
-#include "auxiliares.cpp"
+#include <iterator>
+#include <functional>
+#include <cstdlib> //rand()
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <random>
+
+#define d_int int
 
 using namespace std;
 typedef unsigned long long ull;
+
 int ull_bits = sizeof(ull) * 8;
 
 // transformar vector de claves,valores a solo valores
