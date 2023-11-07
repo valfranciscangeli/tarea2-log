@@ -67,6 +67,7 @@ int main()
 
             start = clock();
             // Llamada a Radixsort
+            cout << "probando radix sort ... \n" << endl;
             vector<ull> copia_de_data2;
             copia_de_data2 = data; // copiamos la data
             radix_sort(copia_de_data2);
