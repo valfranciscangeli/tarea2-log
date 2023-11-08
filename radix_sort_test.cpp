@@ -47,7 +47,7 @@ int main()
         cout << valor << "\n";
     }
 
-    radix_sort(randomVector, 5);
+    radix_sort(randomVector,31);
     // imprimimos el vector ordenado
     cout << "vector ordenado... \n"
          << endl;

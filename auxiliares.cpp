@@ -17,7 +17,7 @@
 using namespace std;
 typedef unsigned long long ull;
 
-int cantidad_de_valores = 1e6; // poner 1e8 para 100millones
+int cantidad_de_valores = 1e8; // poner 1e8 para 100millones
 
 /*Función para generar los sets de datos para los experimentos.
 Se le pasa pasa un vector vacío data
@@ -124,7 +124,7 @@ void separar_registros_de_k_por_exp()
         if (output_files.find(n_universo) == output_files.end())
         {
             // Crea un nuevo archivo de salida para este valor de n_universo.
-            std::string output_filename = "output_" + std::to_string(n_universo) + ".csv";
+            std::string output_filename = "registro_de_k_para_2^" + std::to_string(n_universo) + ".csv";
             output_files[n_universo].open(output_filename);
 
             // Escribe la cabecera en el archivo de salida.

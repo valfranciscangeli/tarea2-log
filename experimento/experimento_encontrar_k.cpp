@@ -36,7 +36,7 @@ void kOptimo(int exp)
         // generamos el arreglo para probar
         generateTestData(test, rand(), exp, 0, cantidad_de_valores);
 
-        for (int log = 1; log <= exp + 1; log++)
+        for (int log = 1; log <= min(exp + 1, 30); log++)
         {
             cout << "probando k = " << log << endl;
             vector<ull> arreglo(test); // Se copia eltest facilitado
@@ -46,7 +46,7 @@ void kOptimo(int exp)
             auto us = chrono::duration_cast<chrono::microseconds>(end - start);
             k_times.push_back((double)us.count()); // se caclula el tiempo
             char linea[50];
-            sprintf(linea, "%d,%d,%d,%d, %d\n", exp, log, (int)us.count(), iteracion, cantidad_de_valores);
+            sprintf(linea, "%d,%d,%d,%d,%d\n", exp, log, (int)us.count(), iteracion, cantidad_de_valores);
             fwrite(linea, 1, strlen(linea), results);
         }
     }
@@ -62,7 +62,7 @@ int main()
     // Generación de archivos que registren los tiempos de ordenamiento de radixSort para k en cada universo
     FILE *k_times;
     k_times = fopen("Registro_de_tiempos_por_cada_k.csv", "w");
-    char linea1[] = "n_universo, k, tiempo (micro segundos), iteracion, cantidad_valores_en_arreglo\n";
+    char linea1[] = "n_universo,k_value,tiempo_(micro_segundos),iteracion,cantidad_valores_en_arreglo\n";
     fwrite(linea1, 1, strlen(linea1), k_times);
     fclose(k_times);
 
@@ -75,7 +75,7 @@ int main()
         kOptimo(exp);
     }
 
-    separar_registros_de_k_por_exp();
+
 
     return 0;
 }

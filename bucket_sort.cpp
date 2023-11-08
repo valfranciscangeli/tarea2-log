@@ -32,9 +32,9 @@ vector<vector<ull>> bucket_sort(vector<vector<ull>> A, bool init1 = false)
     }
 
 
-    // for (ull elem:C){
-    //     cout << elem << endl;
-    // }
+    
+       //cout << "casillas en C:" << C.size() << endl;
+
 
     for (int j = 1; j < C.size(); j++)
     {

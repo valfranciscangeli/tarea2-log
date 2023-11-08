@@ -12,7 +12,7 @@
 #include "../radix_sort.cpp"
 
 #define N_max 64
-#define REPS 100 // 100
+#define REPS 10 // 100
 #define dbg 0    // cambiar a 1 para debugear
 // Definición de tipos de datos
 typedef unsigned long long ull;
@@ -20,7 +20,7 @@ typedef unsigned long long ull;
 
 
 // arreglo de k's elegido (cambiar valores por los reales)
-vector<ull> ks(64, 1);
+vector<ull> ks(64, 2);
 
 int main()
 {
