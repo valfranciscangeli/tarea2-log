@@ -19,8 +19,8 @@ typedef unsigned long long ull;
 
 
 
-// arreglo de k's elegido (cambiar valores por los reales)
-vector<ull> ks(64, 2);
+// arreglo de k's elegido
+vector<ull> ks = {2, 3, 4, 5, 6, 6, 8, 9, 8, 11, 12, 13, 14, 13, 16, 16, 18, 19, 16, 16, 22, 23, 23, 22, 22, 24, 22, 22, 22, 22, 23, 23, 23, 23, 23, 27, 29, 22, 24, 26, 23, 22, 29, 22, 26, 22, 29, 22, 22, 22, 22, 22, 23, 24, 22, 26, 22, 23, 22, 22, 30, 28, 22, 28};
 
 int main()
 {
@@ -82,6 +82,7 @@ int main()
             start = chrono::high_resolution_clock::now();
             // extraer el k del arreglo de k's
             ull k = ks[exp - 1];
+            cout << "k a usar: " << k << endl;
             radix_sort(copia_de_data2, k);
             end = chrono::high_resolution_clock::now();
             tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
