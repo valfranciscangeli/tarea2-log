@@ -3,7 +3,7 @@
 using namespace std;
 typedef unsigned long long ull;
 
-void quick_sort_recursive(vector<ull> A, ull range, ull offset)
+void quick_sort_recursive(vector<ull> &A, ull range, ull offset)
 {
     // Se inicializa el generador de números aleatorios
     random_device rd;     // Genera una semilla aleatoria desde el dispositivo
@@ -50,7 +50,7 @@ void quick_sort_recursive(vector<ull> A, ull range, ull offset)
 Esta implementación del algoritmo Quick Sort ordena un rango de un iterable escogiendo un pivote aleatorio, lo mueve al final del
 rango y traslada todos los elementos mayores al pivote a la derecha del mismo, junto con ir moviendo el pivote hacia la izquierda.
 */
-void quick_sort(vector<ull> A)
+void quick_sort(vector<ull> &A)
 {
     ull range = A.size();
     ull offset = 0;
