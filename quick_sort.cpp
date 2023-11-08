@@ -1,4 +1,4 @@
-#include "auxiliares.cpp"
+#include "auxiliares_rs.cpp"
 
 using namespace std;
 typedef unsigned long long ull;
@@ -10,6 +10,7 @@ void quick_sort_recursive(vector<ull> &A, ull range, ull offset)
     mt19937_64 gen(rd()); // Generador de números aleatorios de 64 bits
     uniform_int_distribution<ull> distribution(offset, offset + range - 1);
 
+
     // Si el rango es menor o igual a 1, se retorna inmediatamente, no hay nada que ordenar.
     if (range <= 1)
     {
@@ -19,7 +20,8 @@ void quick_sort_recursive(vector<ull> &A, ull range, ull offset)
     // Se elige el pivote y se mueve al final del rango
     ull pivotIndex = distribution(gen);
     swap(A[pivotIndex], A[offset + range - 1]);
-    pivotIndex = offset + range + 1;
+    pivotIndex = offset + range - 1;
+    
 
     // Se inicializa el invariante "leftLow", que apuntará al elemento mayor al pivote que se encuentre más a la izquierda en el rango
     ull leftLow = offset;

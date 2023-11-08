@@ -20,7 +20,7 @@ vector<ull> transform_vector(vector<vector<ull>> old_data)
     ull vectorSize = old_data.size();
     vector<ull> finalVector;
 
-    for (int i = 0; i < vectorSize; i++)
+    for (ull i = 0; i < vectorSize; i++)
     {
 
         finalVector.push_back(old_data[i][1]);
