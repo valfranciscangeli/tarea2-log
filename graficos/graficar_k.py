@@ -4,7 +4,7 @@ import pandas as pd
 """ aca vamos a recorrer el csv pa encontrar el k mejor para cada universo """
 
 k_data = pd.read_csv("experimento/output/Registro_de_tiempos_por_cada_k.csv")
-
+print(k_data)
 
 promedios = k_data.groupby(['n_universo', 'k_value'], as_index=False)['tiempo_(micro_segundos)'].mean()
 print(promedios)
@@ -22,11 +22,12 @@ for ind in promedios.index:
     else:
         prev_min_value = minimos[llave]
         new_min_value = (k, promedio)
+        #print("valores de promedio",prev_min_value[0] ,prev_min_value[1] , new_min_value[0], new_min_value[1])
         if prev_min_value[1] > new_min_value[1]:
             minimos[llave] = new_min_value
             
             
-print(minimos)
+#print(minimos)
 
 
 
@@ -36,4 +37,8 @@ for llave in minimos:
     resultado.append(minimos[llave][0])
     
     
-print(resultado)
+print("lista de k's elegidos: " + str(resultado))
+
+
+# graficamos k vs tiempo promedio para cada universo
+
