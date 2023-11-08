@@ -37,8 +37,11 @@ for llave in minimos:
     resultado.append(minimos[llave][0])
     
     
-print("lista de k's elegidos: " + str(resultado))
+print("\nlista de k's elegidos: " + str(resultado))
 
 
 # graficamos k vs tiempo promedio para cada universo
-
+for ind in promedios.index:
+    llave = promedios['n_universo'][ind]
+    k = promedios['k_value'][ind]
+    promedio = promedios['tiempo_(micro_segundos)'][ind] 
