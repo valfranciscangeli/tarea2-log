@@ -36,7 +36,8 @@ void quick_sort_recursive(vector<ull> A, ull range, ull offset)
         else
         {
             swap(A[pivotIndex - 1], A[leftLow]);
-            swap(A[leftLow], A[pivotIndex]);
+            swap(A[pivotIndex - 1], A[pivotIndex]);
+            pivotIndex--;
         }
     }
 
