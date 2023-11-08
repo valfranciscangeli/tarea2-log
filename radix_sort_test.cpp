@@ -23,7 +23,7 @@ int main()
     ull max_value = static_cast<ull>(pow(2, 64)) - 1;
     uniform_int_distribution<ull> distribution(1, max_value);
 
-    int vectorSize = pow(10, 1); // cantidad de valores en el vector
+    int vectorSize = 1e8; // cantidad de valores en el vector
     vector<ull> randomVector;
 
     for (int i = 0; i < vectorSize; i++)
@@ -47,7 +47,7 @@ int main()
         cout << valor << "\n";
     }
 
-    radix_sort(randomVector,31);
+    radix_sort(randomVector,28);
     // imprimimos el vector ordenado
     cout << "vector ordenado... \n"
          << endl;
