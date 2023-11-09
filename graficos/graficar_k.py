@@ -1,9 +1,10 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 
 
 """ aca vamos a recorrer el csv pa encontrar el k mejor para cada universo """
 
-k_data = pd.read_csv("experimento/output/Registro_de_tiempos_por_cada_k.csv")
+k_data = pd.read_csv("Registro_de_tiempos_por_cada_k.csv")
 print(k_data)
 
 promedios = k_data.groupby(['n_universo', 'k_value'], as_index=False)['tiempo_(micro_segundos)'].mean()
@@ -45,3 +46,5 @@ for ind in promedios.index:
     llave = promedios['n_universo'][ind]
     k = promedios['k_value'][ind]
     promedio = promedios['tiempo_(micro_segundos)'][ind] 
+
+print(promedios)
