@@ -1,4 +1,11 @@
-#include "auxiliares_rs.cpp"
+#include <iterator>
+#include <functional>
+#include <cstdlib> //rand()
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <random>
 
 using namespace std;
 typedef unsigned long long ull;

@@ -10,9 +10,10 @@
 #include <chrono>
 #include "../quick_sort.cpp"
 #include "../radix_sort.cpp"
+#include "../auxiliares.cpp"
 
 #define N_max 64
-#define REPS 10 // 100
+#define REPS 100 // 100
 #define dbg 0    // cambiar a 1 para debugear
 // Definición de tipos de datos
 typedef unsigned long long ull;
@@ -31,7 +32,7 @@ int main()
     vector<ull> data;
 
     // Tests para ambos algoritmos. Para n de 1 a 64
-    for (int exp = 1; exp <= N_max; exp++)
+    for (int exp = 33; exp <= N_max; exp++)
     {
         cout << "Pruebas para universo 2^" << exp << " en curso..." << endl;
         // Creación del nombre del archivo
@@ -41,7 +42,7 @@ int main()
         FILE *results_ptr;
         results_ptr = fopen(archivoFilename, "w");
         // se inicializa la línea de encabezados: algoritmo, iteración, tiempo de generación de datos, tiempo ordenamiento
-        char encabezado[] = "s_name,repeticion,gen_time(s),sort_time(us), cantidad_valores_en_arreglo\n";
+        char encabezado[] = "s_name,repeticion,gen_time(s),sort_time(us),cantidad_valores_en_arreglo\n";
         fwrite(encabezado, 1, strlen(encabezado), results_ptr);
 
         // Variables de tiempo
@@ -73,7 +74,7 @@ int main()
             end = chrono::high_resolution_clock::now();
             auto tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
             // registro resultados quicksort
-            sprintf(resultRow1, "quick,%d,%.7f,%d, %d\n", tests + 1, (double)tempo1.count() / 1000000,
+            sprintf(resultRow1, "quick,%d,%.7f,%d,%d\n", tests + 1, (double)tempo1.count() / 1000000,
                     (long int)tempo2.count(), cantidad_de_valores);
 
             // Llamada a Radixsort
@@ -87,7 +88,7 @@ int main()
             end = chrono::high_resolution_clock::now();
             tempo2 = chrono::duration_cast<chrono::microseconds>(end - start);
             // registro resultados radixsort
-            sprintf(resultRow2, "radix,%d,%.7f,%d, %d\n", tests + 1, (double)tempo1.count() / 1000000,
+            sprintf(resultRow2, "radix,%d,%.7f,%d,%d\n", tests + 1, (double)tempo1.count() / 1000000,
                     (long int)tempo2.count(), cantidad_de_valores);
 
             // Registro de resultados
